@@ -21,26 +21,36 @@ temperatura = [
 ]
 
 # Declaramos variables de la ciudad y la semana que queremos saber el promedio
-ciudad_input = 2
-semana_input = 1
 
 
 
-suma = 0
-contador = 0
+
+
+
 
 # Usar bucles for anidados para calcular el promedio
-for ciudad in range(len(temperatura)):  # Recorremos las ciudades
-    if ciudad == ciudad_input:  # Verificamos si es la ciudad seleccionada
-        for semana in range(len(temperatura[ciudad])):  # Recorremos las semanas
-            if semana == semana_input:  # Verificamos si es la semana seleccionada
-                for temperatura in range(len(temperatura[ciudad][semana])):  # Recorremos las temperaturas
-                    suma += temperatura[ciudad][semana][temperatura]  # Sumar las temperaturas
-                    contador += 1  # Contamos las temperaturas
+def temperaturas (temperatura,c,s):
 
-# Calcular el promedio si nuestro contador es mayor a 0
-if contador > 0:
-    promedio = suma / contador  #Calculamos el promedio y dividimos para los 7 numero que son
-    print(f"La ciudad {ciudad_input } de la semana {semana_input } tiene una temperatura de promedio : {promedio}")
-else:
-    print("No se puede calcular.")
+    #Creamos un  for en el cual vamos a recorrer
+    suma = 0 # Declaramos nuestra variable y la inicializamos en 0
+    for i in range (len(temperatura[c][s])):
+        suma+= temperatura[c][s][i]   #Sumamos nuestra lista con la iteración i que va a recorrer cada temperatura
+
+    prom = suma / len(temperatura[c][s]) # Dividimos  nuestra suma para la longitud de la semana que escojimos en este caso para 7
+
+    return prom # Retornamos el promedio
+
+#Declaramos 2 variables para llamar por teclado a la ciudad y semana
+
+ciu = int(input("Ingrese la ciudad (0 a 2) : "))
+sem = int(input("Ingrese la semana  (0 a 3) : "))
+
+
+while ciu > 2 and sem > 3 :  #Creamos un bucle while que va a decirnos que volvamos a ingresar si colocamos un indice que no hay
+    print("Vuelva a ingresar")
+    ciu = int(input("Ingrese la ciudad (0 a 2) : "))
+    sem = int(input("Ingrese la semana  (0 a 3) : "))
+
+#Llamamos a nuestra funcion
+prom_final = (temperaturas(temperatura,ciu,sem))
+print(f"La ciudad {ciu} en su semana {sem} tiene un promedio de {prom_final} grados") #Imprimimos en pantalla
